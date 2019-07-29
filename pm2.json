@@ -1,0 +1,10 @@
+{
+	"apps" : [{
+		"name"        : "个人知识库管理后台",
+		"script"      : "./bin/www",
+		"watch"       : true,
+		"exec_interpreter" : "babel-node",
+		"exec_mode"        : "fork",
+		"node_args": "--harmony"
+	}]
+}
