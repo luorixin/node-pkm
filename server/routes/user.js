@@ -5,6 +5,6 @@ const Router = new router()
 
 Router.post('/register', User.register)
 Router.post('/login', User.login)
-Router.get('/info', User.info)
+Router.post('/logOut', User.loginOut)
 
 export default Router

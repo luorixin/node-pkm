@@ -1,7 +1,7 @@
 const userSchema = (sequelize, DataTypes) => {
 	return sequelize.define('user', {
 		id: {
-			type: DataTypes.INTEGER(11),
+			type: DataTypes.BIGINT(),
 			allowNull: false,
 			primaryKey: true,
 			autoIncrement: true

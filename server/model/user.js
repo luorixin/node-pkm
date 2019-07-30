@@ -1,9 +1,6 @@
-import theDataBase from '../config/db'
+import Schema from '../schema'
 
-const userSchema = theDataBase.import('../schema/user')
-
-//自动创建表，force：ture会先删掉在创建
-userSchema.sync({ force: false })
+const userSchema = Schema.User
 
 class UserModel {
 
