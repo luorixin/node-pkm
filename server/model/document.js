@@ -1,4 +1,5 @@
 import Schema from '../schema'
+import { isNotEmpty } from '../../util'
 
 const documentSchema = Schema.Document
 
@@ -16,27 +17,32 @@ class DocumentModel {
 			['id', 'DESC']
 		]
 		data.where = {}
-		if(typeof data.status !== 'undefined' && data.status!== null){
+		if(isNotEmpty(data.status)){
 			data.where.status = data.status
 		}
-		if(typeof data.type !== 'undefined' && data.type!== null){
+		if(isNotEmpty(data.type)){
 			data.where.type = data.type
 		}
-		if(typeof data.userId !== 'undefined' && data.userId!== null){
-			data.where.userId = data.userId
-		}
-		if(typeof data.position !== 'undefined' && data.position!== null){
-			data.where.position = {
-				'$like': `%${data.position}%`,
+		try {
+			if(isNotEmpty(data.userId)){
+				data.where.userId = data.userId
 			}
-		}
-		if(typeof data.name !== 'undefined' && data.name!== null){
-			data.where.name = {
-				'$like': `%${data.name}%`,
+			if(isNotEmpty(data.position)){
+				data.where.position = {
+					'$like': '%'+data.position+'%',
+				}
 			}
+			if(isNotEmpty(data.name)){
+				data.where.name = {
+					'$like': '%'+data.name+'%',
+				}
+			}
+			const documents = await documentSchema.findAndCountAll(data)
+			return documents
+		} catch (error) {
+			console.log(error)
 		}
-		const documents = await documentSchema.findAndCountAll(data)
-		return documents
+		
 	}
 }
 

@@ -27,7 +27,7 @@ const documentSchema = (sequelize, DataTypes) => {
 			allowNull: true
 		},
 		position: {
-			type: DataTypes.CHAR(50),
+			type: DataTypes.STRING(),
 			allowNull: false
 		}
 	}, {
