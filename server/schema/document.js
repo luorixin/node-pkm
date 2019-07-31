@@ -31,7 +31,9 @@ const documentSchema = (sequelize, DataTypes) => {
 			allowNull: false
 		}
 	}, {
-		tableName: 'document'
+		tableName: 'document',
+		charset: 'utf8',
+		collate: 'utf8_general_ci'
 	})
 }
 

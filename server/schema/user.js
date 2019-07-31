@@ -23,7 +23,9 @@ const userSchema = (sequelize, DataTypes) => {
 			allowNull: true
 		}
 	}, {
-		tableName: 'user'
+		tableName: 'user',
+		charset: 'utf8',
+		collate: 'utf8_general_ci'
 	})
 }
 

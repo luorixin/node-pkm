@@ -1,5 +1,6 @@
 import Schema from '../schema'
 import { isNotEmpty } from '../../util'
+import Sequelize from 'sequelize'
 
 const documentSchema = Schema.Document
 
@@ -12,6 +13,7 @@ class DocumentModel {
 	static async getDocumentByUser(data){
 		data.limit = data.pageSize || 10
 		const pageNo = data.pageNo || 1
+		const Op = Sequelize.Op
 		data.offset = data.limit * (pageNo - 1)
 		data.order = [
 			['id', 'DESC']
@@ -23,20 +25,20 @@ class DocumentModel {
 		if(isNotEmpty(data.type)){
 			data.where.type = data.type
 		}
+		if(isNotEmpty(data.userId)){
+			data.where.userId = data.userId
+		}
+		if(isNotEmpty(data.position)){
+			data.where.position = {
+				[Op.like]: '%'+data.position+'%',
+			}
+		}
+		if(isNotEmpty(data.name)){
+			data.where.name = {
+				[Op.like]: '%'+data.name+'%',
+			}
+		}
 		try {
-			if(isNotEmpty(data.userId)){
-				data.where.userId = data.userId
-			}
-			if(isNotEmpty(data.position)){
-				data.where.position = {
-					'$like': '%'+data.position+'%',
-				}
-			}
-			if(isNotEmpty(data.name)){
-				data.where.name = {
-					'$like': '%'+data.name+'%',
-				}
-			}
 			const documents = await documentSchema.findAndCountAll(data)
 			return documents
 		} catch (error) {
