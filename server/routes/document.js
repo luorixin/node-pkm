@@ -3,7 +3,7 @@ import Document from '../controllers/document'
 
 const Router = new router()
 
-Router.post('/documentCreate', Document.createDocument)
+Router.post('/optDocument', Document.optDocument)
 Router.post('/documentList', Document.getDocumentByUser)
 
 export default Router

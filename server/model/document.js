@@ -10,6 +10,15 @@ class DocumentModel {
 		return await documentSchema.create(data)
 	}
   
+	static async updateDocument(data){
+		let opt = Object.assign({},data)
+		let where = {
+			'id': opt.id,
+			'userId': opt.userId
+		}
+		return await documentSchema.update(opt, { where: where })
+	}
+  
 	static async getDocumentByUser(data){
 		data.limit = data.pageSize || 10
 		const pageNo = data.pageNo || 1
